@@ -46,4 +46,8 @@ export class RoomManager {
     const roomId = this.socketToRoom[socketId];
     return roomId ? this.rooms[roomId] : null;
   }
+
+  isUserInRoom(socketId, roomId) {
+    return this.rooms[roomId] && this.rooms[roomId].includes(socketId);
+  }
 }
