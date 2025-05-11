@@ -1,0 +1,31 @@
+const express = require('express');
+const jwt = require('jsonwebtoken');
+const cors = require('cors');
+const app = express();
+const JWTSECRET = 'IAMBATMAN';
+
+
+app.use(cors());
+
+
+function auth(req, res, next) {
+    console.log('Auth middleware');
+    let user = req.body.user_id;
+    let token = req.body.token;
+    if (user && token) {
+        let verifiedToken = jwt.verify(token, JWTSECRET);
+        if (verifiedToken) {
+            console.log('Token verified');
+            let verifiedUser = users.find((user) => user.username === user);
+            if (verifiedUser) {
+                req.user = verifiedUser;
+                next();
+            }
+            else {
+                res.status(401).json({ message : 'User not found'});
+            }
+        } else {
+            res.status(401).json({ message : 'Token not verified'});
+        }
+    }
+}
