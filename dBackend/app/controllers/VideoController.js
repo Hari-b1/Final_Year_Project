@@ -3,7 +3,7 @@
  * Handles video-related API requests for a Netflix-like streaming platform
  */
 import VideoMetadataManager from '../models/Video/VideoMetadataManager.js';
-import { FileProcessor } from '../models/Video/FileProcessor.js';
+import { FileProcessor, processingOptions } from '../models/Video/FileProcessor.js';
 
 
 
@@ -61,7 +61,6 @@ class VideoController {
       let outputPath;
       let outputFormat;
       let processOptions;
-      const { processingOptions } = require('../models/Video/FileProcessor.js');
       
       // Configure output based on processing type and quality
       if (processingType === 'streaming') {
@@ -381,6 +380,41 @@ class VideoController {
       });
     } catch (error) {
       res.status(500).json({ error: 'Failed to retrieve featured videos', details: error.message });
+    }
+  }
+
+  /**
+   * Get video previews with thumbnails and video links
+   * @param {Object} req - Express request object
+   * @param {Object} res - Express response object
+   */
+  getVideoPreviews(req, res) {
+    try {
+      const { limit = 10, offset = 0 } = req.query;
+      const videos = this.metadataManager.getAllVideos({});
+      
+      // Pagination
+      const paginatedVideos = videos.slice(offset, offset + limit);
+      
+      // Format the response with only necessary preview information
+      const previews = paginatedVideos.map(video => ({
+        videoId: video.videoId,
+        title: video.title,
+        thumbnailUrl: video.thumbnailUrl,
+        streamingUrl: video.streamingUrl,
+        duration: video.duration,
+        views: video.views,
+        uploadTimestamp: video.uploadTimestamp
+      }));
+      
+      res.json({
+        total: videos.length,
+        offset: parseInt(offset),
+        limit: parseInt(limit),
+        previews
+      });
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to retrieve video previews', details: error.message });
     }
   }
 }

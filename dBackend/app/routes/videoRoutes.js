@@ -56,6 +56,11 @@ router.get('/thumbnails/:filename',auth, (req, res) => {
   videoController.serveThumbnail(req, res);
 });
 
+// Route to get video previews
+router.get('/previews', auth, (req, res) => {
+  videoController.getVideoPreviews(req, res);
+});
+
 // Route to get categories
 router.get('/categories',auth, (req, res) => {
   videoController.getCategories(req, res);

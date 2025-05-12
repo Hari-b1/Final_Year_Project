@@ -1,0 +1,19 @@
+{
+  "videoId": "1746988745106",
+  "title": "file_example_MP4_480_1_5MG.mp4",
+  "description": "",
+  "category": "uncategorized",
+  "uploaderId": "anonymous",
+  "uploadTimestamp": "2025-05-11T18:39:05.606Z",
+  "processingType": "streaming",
+  "quality": "medium",
+  "duration": 0,
+  "fileSize": 1570024,
+  "originalFilename": "file_example_MP4_480_1_5MG.mp4",
+  "streamingUrl": "/api/stream/1746988745106/playlist.m3u8",
+  "thumbnailUrl": "/api/thumbnails/1746988745106.jpg",
+  "views": 0,
+  "likes": 0,
+  "status": "available",
+  "lastUpdated": "2025-05-11T18:39:05.606Z"
+}

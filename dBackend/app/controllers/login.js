@@ -8,7 +8,6 @@ dotenv.config();
 
 export default function LoginController(req, res) {
     const { userId, userPassword } = req.body;
-    console.log(process.env.JWTSECRETKEY);
     
     if (!userId || !userPassword) {
         return res.status(400).json({ message: 'All fields are required' });
@@ -26,5 +25,6 @@ export default function LoginController(req, res) {
     }
 
     const token = jwt.sign({ userId: user.userId }, JWTSECRETKEY);
+    console.log(token);
     return res.status(200).json({ token });
 }
