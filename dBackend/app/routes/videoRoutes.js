@@ -36,28 +36,28 @@ router.post('/upload', auth, upload.single('videoFile'), (req, res) => {
 });
 
 // Route to get video metadata
-router.get('/videos/:id', auth, (req, res) => {
+router.get('/videos/:id', (req, res) => {
   console.log('Fetching metadata for video ID:', req.params.id);
   videoController.getVideoMetadata(req, res);
 });
 
 // Route to serve the video stream
-router.get('/stream/:id/:file',auth, (req, res) => {
+router.get('/stream/:id/:file', (req, res) => {
   videoController.serveStreamFile(req, res);
 });
 
 // Route to serve the video file
-router.get('/videos/:id',auth, (req, res) => {
+router.get('/videos/:id', (req, res) => {
   videoController.serveVideoFile(req, res);
 });
 
 // Route to serve the video thumbnail
-router.get('/thumbnails/:filename',auth, (req, res) => {
+router.get('/thumbnails/:filename', (req, res) => {
   videoController.serveThumbnail(req, res);
 });
 
 // Route to get video previews
-router.get('/previews', auth, (req, res) => {
+router.get('/previews', (req, res) => {
   videoController.getVideoPreviews(req, res);
 });
 
